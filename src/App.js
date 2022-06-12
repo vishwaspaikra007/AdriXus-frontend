@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react';
 function App() {
   const [token, setToken] = useState("")
   const [name, setName] = useState("")
-  // const base = ""
-  const base = "/adrixus-frontend"
+  const base = ""
+  // const base = "/adrixus-frontend"
   useEffect(() => {
       setToken(window.localStorage.getItem('signedToken'))
       setName(window.localStorage.getItem('name'))
@@ -26,10 +26,10 @@ function App() {
             : <Navigate replace to={base + '/login'} />} />
           <Route path={base + '/login'} element={
             token ? <Navigate replace to={base + '/'} /> 
-            : <Login  setName={(val) => setName(val)} setToken={(token) => setToken(token)}/>} />
+            : <Login base={base}  setName={(val) => setName(val)} setToken={(token) => setToken(token)}/>} />
           <Route path={base + '/signup'} element={
             token ? <Navigate replace to={base + '/'} /> 
-            : <Signup  setName={(val) => setName(val)} setToken={(token) => setToken(token)}/>} />
+            : <Signup base={base} setName={(val) => setName(val)} setToken={(token) => setToken(token)}/>} />
         </Routes>
       </Router>
     </div>

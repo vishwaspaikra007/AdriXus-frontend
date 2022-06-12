@@ -9,8 +9,6 @@ export default function Login(props) {
     password: ""
   })
 
-  const navigate = useNavigate()
-
   const handleChange = (e) => {
       console.log(e, loginDetails)
     setLoginDetails({...loginDetails, [e.target.name]: e.target.value})
@@ -48,14 +46,14 @@ export default function Login(props) {
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>
           <span>Email</span>
-          <input type='text' name='email' value={loginDetails.email} onChange={(e) => handleChange(e)}/>
+          <input required type='text' name='email' value={loginDetails.email} onChange={(e) => handleChange(e)}/>
         </label>
         <label>
           <span>Password</span>
-          <input type='password' name='password' value={loginDetails.password} onChange={(e) => handleChange(e)}/>
+          <input required type='password' name='password' value={loginDetails.password} onChange={(e) => handleChange(e)}/>
         </label>
         <input type='submit' value='Login' />
-      <Link to='/adrixus-frontend/signup'>Signup</Link>
+      <Link to={props.base + '/signup'}>Signup</Link>
       </form>
     </div>
   )

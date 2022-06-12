@@ -47,6 +47,7 @@ export default function Signup(props) {
         <label>
           <span>First Name</span>
           <input
+            required
             type="text"
             name="firstName"
             value={signupDetails.firstName}
@@ -56,6 +57,7 @@ export default function Signup(props) {
         <label>
           <span>Last Name</span>
           <input
+            required
             type="text"
             name="lastName"
             value={signupDetails.lastName}
@@ -65,6 +67,7 @@ export default function Signup(props) {
         <label>
           <span>Email</span>
           <input
+            required
             type="text"
             name="email"
             value={signupDetails.email}
@@ -74,6 +77,7 @@ export default function Signup(props) {
         <label>
           <span>Password</span>
           <input
+            required
             type="password"
             name="password"
             value={signupDetails.password}
@@ -81,7 +85,7 @@ export default function Signup(props) {
           />
         </label>
         <input type="submit" value="Sign Up" />
-      <Link to='/adrixus-frontend/login'>Login</Link>
+      <Link to={props.base + '/login'}>Login</Link>
       </form>
     </div>
   )
