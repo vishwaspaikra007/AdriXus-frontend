@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react';
 function App() {
   const [token, setToken] = useState("")
   const [name, setName] = useState("")
-  const base = ""
-  // const base = "/adrixus-frontend"
+  // const base = ""
+  const base = "/adrixus-frontend"
   useEffect(() => {
       setToken(window.localStorage.getItem('signedToken'))
       setName(window.localStorage.getItem('name'))

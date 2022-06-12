@@ -2,6 +2,18 @@ import React, { useEffect, useState } from 'react'
 import styles from './Dashboard.module.css'
 import baseURL from './config'
 
+export const handlePage = (data) => {
+  // console.log(page)
+  let i = 0
+  let totPages = {}
+  for (let i = 0; i < data.length; ++i) {
+    let key = parseInt(i / 10)
+    if (totPages[key] === undefined) totPages[key] = []
+    totPages[key].push(data[i])
+  }
+  // console.log(totPages)
+  return totPages
+}
 export const _fetch = (url, token) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -51,20 +63,7 @@ export default function Dashboard(props) {
       )
     })
     setPageNo(0)
-    handlePage(filteredList)
-  }
-
-  const handlePage = (data) => {
-    // console.log(page)
-    let i = 0
-    let totPages = {}
-    for (let i = 0; i < data.length; ++i) {
-      let key = parseInt(i / 10)
-      if (totPages[key] === undefined) totPages[key] = []
-      totPages[key].push(data[i])
-    }
-    // console.log(totPages)
-    setPage(totPages)
+    setPage(handlePage(filteredList))
   }
 
   useEffect(() => {
@@ -97,7 +96,7 @@ export default function Dashboard(props) {
       if (props.token) {
         let data = await _fetch(baseURL + 'getusers', props.token)
         if (data.status === 'successfull') {
-          handlePage(data.list)
+          setPage(handlePage(data.list))
           setOriginalList(data.list)
         } else {
           props.setToken('')
@@ -113,7 +112,7 @@ export default function Dashboard(props) {
   useEffect(() => {
     let list = originalList
     isAscendingSort ? list.sort(asc) : list.sort(desc)
-    handlePage(list)
+    setPage(handlePage(list))
   }, [isAscendingSort])
 
   return (

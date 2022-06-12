@@ -17,8 +17,9 @@ function Login(props) {
 
   const emailRef = useRef()
   const [disabled, setDisabled] = useState(false)
+
   const handleChange = (e) => {
-    console.log(e, loginDetails)
+    // console.log(e, loginDetails)
     setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value })
   }
 
