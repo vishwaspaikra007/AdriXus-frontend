@@ -24,3 +24,9 @@
 .container button:active {
     transform: scale(0.99) translateY(2px);
 }
+@media only screen and (max-width: 500px) {
+    .container {
+        justify-content: left;
+        text-indent: 20px;
+    }
+}

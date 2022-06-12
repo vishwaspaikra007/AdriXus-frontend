@@ -1,7 +1,13 @@
-import React, { useState, createContext, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Signup.module.css'
 import baseURL from './config'
+
+export function validForm(text) {
+  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  if (text.match(mailformat)) return true
+  return false
+}
 
 export default function Signup(props) {
   const [signupDetails, setSignupDetails] = useState({
@@ -10,13 +16,21 @@ export default function Signup(props) {
     email: '',
     password: '',
   })
+  const emailRef = useRef()
+  const [disabled, setDisabled] = useState(false)
   const handleChange = (e) => {
     setSignupDetails({ ...signupDetails, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    fetch(baseURL+'signup', {
+    if (!validForm(signupDetails.email)) {
+      alert('invalid email')
+      emailRef.current.focus()
+      return
+    }
+    setDisabled(true)
+    fetch(baseURL + 'signup', {
       method: 'POST',
 
       body: JSON.stringify(signupDetails),
@@ -24,17 +38,19 @@ export default function Signup(props) {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-    }).then(response => {
-      response.json().then(data => {
+    }).then((response) => {
+      response.json().then((data) => {
         console.log(data)
-        if(data.signedup) {
+        if (data.signedup) {
           props.setToken(data.signedJWT)
           props.setName(data.name)
           window.localStorage.setItem('signedToken', data.signedJWT)
           window.localStorage.setItem('name', data.name)
+          setDisabled(false)
           alert(data.msg)
           // navigate('/')
         } else {
+          setDisabled(false)
           alert(data.msg)
         }
       })
@@ -67,6 +83,7 @@ export default function Signup(props) {
         <label>
           <span>Email</span>
           <input
+            ref={emailRef}
             required
             type="text"
             name="email"
@@ -84,8 +101,8 @@ export default function Signup(props) {
             onChange={(e) => handleChange(e)}
           />
         </label>
-        <input type="submit" value="Sign Up" />
-      <Link to={props.base + '/login'}>Login</Link>
+        <input disabled={disabled} type="submit" value="Sign Up" />
+        <Link to={props.base + '/login'}>Login</Link>
       </form>
     </div>
   )

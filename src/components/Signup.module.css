@@ -15,9 +15,6 @@
     justify-content: center;
     gap: 20px;
 }
-.container label {
-
-}
 .container span {
     display: block;
     text-align: left;
@@ -34,6 +31,9 @@
     text-indent: 20px;
     font-size: 20px;
 }
+.container input:focus {
+    outline: none;
+}
 .container input[type=submit] {
     background-color: blueviolet;
     color: white;
@@ -42,6 +42,12 @@
     padding: 10px 20px;
     font-weight: 600;
     cursor: pointer;
+}
+.container input[type=submit]:disabled {
+    opacity: 0.5;
+}
+.container input[type=submit]:disabled:active {
+    transform: none;
 }
 .container a {
     width: -webkit-fill-available;
