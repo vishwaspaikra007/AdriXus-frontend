@@ -55,7 +55,7 @@ export default function Login(props) {
           <input type='password' name='password' value={loginDetails.password} onChange={(e) => handleChange(e)}/>
         </label>
         <input type='submit' value='Login' />
-      <Link to='/signup'>Signup</Link>
+      <Link to='/adrixus-frontend/signup'>Signup</Link>
       </form>
     </div>
   )

@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styles from './Signup.module.css'
 import baseURL from './config'
 
@@ -10,7 +10,6 @@ export default function Signup(props) {
     email: '',
     password: '',
   })
-  const navigate = useNavigate()
   const handleChange = (e) => {
     setSignupDetails({ ...signupDetails, [e.target.name]: e.target.value })
   }
@@ -82,7 +81,7 @@ export default function Signup(props) {
           />
         </label>
         <input type="submit" value="Sign Up" />
-      <Link to='/login'>Login</Link>
+      <Link to='/adrixus-frontend/login'>Login</Link>
       </form>
     </div>
   )

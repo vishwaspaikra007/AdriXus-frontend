@@ -24,6 +24,7 @@ export default function Dashboard(props) {
       let filteredList = originalList.filter(obj => {
         return (obj.firstName + " " + obj.lastName).substring(0, e.target.value.length).toLowerCase() == e.target.value.toLowerCase()
     })
+      setPageNo(0)
       handlePage(filteredList)
   }
 

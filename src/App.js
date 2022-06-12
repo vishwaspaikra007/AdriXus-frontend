@@ -9,7 +9,8 @@ import { useEffect, useState } from 'react';
 function App() {
   const [token, setToken] = useState("")
   const [name, setName] = useState("")
-
+  // const base = ""
+  const base = "/adrixus-frontend"
   useEffect(() => {
       setToken(window.localStorage.getItem('signedToken'))
       setName(window.localStorage.getItem('name'))
@@ -20,14 +21,14 @@ function App() {
       <Router>
         <Nav token={token} name={name} setToken={(val) => setToken(val)} setName={(val) => setName(val)}/>
         <Routes>
-          <Route path="/" element={
+          <Route path={base + '/'} element={
             token ? <Dashboard token={token} setToken={(val) => setToken(val)} setName={(val) => setName(val)}/> 
-            : <Navigate replace to="/login" />} />
-          <Route path="/login" element={
-            token ? <Dashboard token={token} setToken={(val) => setToken(val)} setName={(val) => setName(val)}/> 
+            : <Navigate replace to={base + '/login'} />} />
+          <Route path={base + '/login'} element={
+            token ? <Navigate replace to={base + '/'} /> 
             : <Login  setName={(val) => setName(val)} setToken={(token) => setToken(token)}/>} />
-          <Route path="/signup" element={
-            token ? <Dashboard token={token} setToken={(val) => setToken(val)} setName={(val) => setName(val)}/> 
+          <Route path={base + '/signup'} element={
+            token ? <Navigate replace to={base + '/'} /> 
             : <Signup  setName={(val) => setName(val)} setToken={(token) => setToken(token)}/>} />
         </Routes>
       </Router>
